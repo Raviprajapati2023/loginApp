@@ -1,6 +1,11 @@
 <template>
   <div>
-    <q-btn outline style="color: goldenrod" label="Goldenrod" />
+    <q-btn outline :label="label" :class="css" />
   </div>
 </template>
-<script></script>
+<script setup>
+const props = defineProps({
+  label: { type: String, default: "Submit" },
+  css: { type: String },
+});
+</script>

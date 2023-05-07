@@ -8,12 +8,13 @@
     :type="type"
     :rules="rules"
     :disabled="disabled"
+    label-position="above"
     dense
     :hide-details="hideDetails"
     :placeholder="placeholder"
     :hint="hint"
     @update:modelValue="$emit('update:modelValue', $event)"
-    class="width"
+    class="width rounded"
   />
 </template>
 <script setup>
