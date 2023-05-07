@@ -3,22 +3,38 @@
     <router-link to="upload" style="text-decoration: none" class="text-red-600">
       This is home page
     </router-link>
-    <RInput v-model="form.name" label="Your Name" />
-    {{ form.name }}
 
-    <div class="text-red-600 font-bold text-lg">
-      Hi this is taiwind css frame work
-    </div>
-    <ImageUpload />
-    <RBtn />
+    <AddressForm @save="getformData" />
+    <RTable :columns="tableColumns" :rows="tableRows" label="Table Data">
+    </RTable>
   </div>
 </template>
 <script setup>
-import ImageUpload from "../components/ImageUpload.vue";
-import RInput from "../components/RInput.vue";
-// import RBtn from "src/controls/RBtn.vue";
+import AddressForm from "src/components/AddressForm.vue";
 import { ref } from "vue";
-const form = ref({
-  name: "",
-});
+
+const tableColumns = ref([
+  {
+    name: "name",
+    required: true,
+    label: "Name",
+    align: "left",
+    field: (row) => row.name,
+    format: (val) => `${val}`,
+    sortable: true,
+  },
+  { name: "email", label: "Email", field: "email", sortable: true },
+  { name: "add", label: "Address", field: "add" },
+]);
+const tableRows = ref([
+  {
+    name: "Ravi Prajapati",
+    email: "ravi@mailinator.com",
+    add: "Indore",
+  },
+]);
+const getformData = (form) => {
+  // console.log(form, "getData");
+  tableRows.value.push(form);
+};
 </script>

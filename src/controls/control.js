@@ -1,33 +1,21 @@
-import { Vue } from "vue";
+const toCamelCase = (text) => text.replace(/-\w/g, clearAndUpper);
+const clearAndUpper = (texct) => text.replace(/-/, "").toUpperCase();
 
-const requireComponent = require.context(
-  // The relative path of the components folder
-  "./global",
-  // Whether or not to look in subfolders
-  true,
-  // The regular expression used to match base component filenames
-  /[A-Z]\w+\.(vue|js)$/
-);
-
-requireComponent.keys().forEach((fileName) => {
-  // Get component config
-  const componentConfig = requireComponent(fileName);
-  // Get PascalCase name of component
-  const componentName = Vue._.upperFirst(
-    Vue._.camelCase(
-      fileName
-        .split("/")
-        .pop()
-        .replace(/\.\w+$/, "")
-    )
-  );
-
-  // Register component globally
-  Vue.component(
-    componentName,
-    // Look for the component options on `.default`, which will
-    // exist if the component was exported with `export default`,
-    // otherwise fall back to module's root.
-    componentConfig.default || componentConfig
-  );
+const files = import.meta.globEager("../controls/*.vue");
+const entries = Object.entries(files);
+const temporaryModules = [];
+entries.forEach((entry) => {
+  let name = toCamelCase(entry[0].split("/")[2]);
+  name = name.split(".vue")[0];
+  const file = {};
+  file[name] = entry[1].default;
+  temporaryModules.push(file);
 });
+
+const modules = Object.assign({}, ...temporaryModules);
+
+export default (app) => {
+  for (const module in modules) {
+    app.component(module, modules[module]);
+  }
+};
