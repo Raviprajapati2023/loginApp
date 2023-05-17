@@ -4,14 +4,15 @@
       This is home page
     </router-link>
 
+    <AddressApi />
     <AddressForm @save="getformData" />
-    <RTable :columns="tableColumns" :rows="tableRows" label="Table Data">
-    </RTable>
+    <RTable :columns="tableColumns" :rows="tableRows" label="Table Data" />
   </div>
 </template>
 <script setup>
-import AddressForm from "src/components/AddressForm.vue";
 import { ref } from "vue";
+import AddressForm from "src/components/AddressForm.vue";
+import AddressApi from "src/components/AddressApi.vue";
 
 const tableColumns = ref([
   {
@@ -29,6 +30,11 @@ const tableColumns = ref([
 const tableRows = ref([
   {
     name: "Ravi Prajapati",
+    email: "ravi@mailinator.com",
+    add: "Indore",
+  },
+  {
+    name: "Test",
     email: "ravi@mailinator.com",
     add: "Indore",
   },
