@@ -1,5 +1,5 @@
 const toCamelCase = (text) => text.replace(/-\w/g, clearAndUpper);
-const clearAndUpper = (texct) => text.replace(/-/, "").toUpperCase();
+const clearAndUpper = (text) => text.replace(/-/, "").toUpperCase();
 
 const files = import.meta.globEager("../controls/*.vue");
 const entries = Object.entries(files);

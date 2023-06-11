@@ -2,7 +2,6 @@
   <q-input
     square
     outlined
-    v-model="text"
     :modelValue="modelValue"
     :label="label"
     :type="type"

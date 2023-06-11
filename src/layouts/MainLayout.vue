@@ -11,7 +11,7 @@
           @click="toggleLeftDrawer"
         />
 
-        <q-toolbar-title> Quasar App </q-toolbar-title>
+        <q-toolbar-title> Quasar Practice </q-toolbar-title>
 
         <div>Quasar v{{ $q.version }}</div>
       </q-toolbar>
@@ -51,6 +51,18 @@ const linksList = [
     caption: "upload",
     icon: "school",
     link: "upload",
+  },
+  {
+    title: "Calculator",
+    caption: "Calculator",
+    icon: "school",
+    link: "calculator",
+  },
+  {
+    title: "Gallary",
+    caption: "images",
+    icon: "school",
+    link: "gallary",
   },
   // {
   //   title: "Github",
