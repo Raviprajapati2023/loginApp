@@ -12,6 +12,7 @@
     "dev": "quasar dev"
   },
   "dependencies": {
+    "@formkit/vue": "^0.18.0-7d9b8a6",
     "@quasar/extras": "^1.0.0",
     "axios": "^0.21.1",
     "chart.js": "^4.3.0",

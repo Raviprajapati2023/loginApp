@@ -1,43 +1,42 @@
 <template>
-  <div class="q-pa-md">
-    <q-carousel swipeable animated v-model="slide" thumbnails infinite>
-      <div v-for="img in images" :key="img.name">
-        <q-carousel-slide :name="img.name" :img-src="img.photo" />
-      </div>
-    </q-carousel>
-    <div class="text-center text-white">
-      <h2 class="font-bold text-center">CodeUps</h2>
-      <p>Biweekly coding meetups on new technologies</p>
+  <div class="p-4 my-8">
+    <p>Has published books:</p>
+    <input type="text " v-model="x" />
+    <h2>Watch effect</h2>
+    <input ref="input" />
+    <div>
+      Todo :
+      <input type="text " v-model="todoId" class="border-1 bg-gray-200" />
     </div>
+    <q-btn label="Open Drawer" class="my-4 ml-64" @click="openDrawer = true" />
+    <DemoDrawer v-model="openDrawer" right>
+      <div class="py-6">
+        <q-btn label="close" @click="openDrawer = false" />
+        draewr content goes here ......
+      </div>
+    </DemoDrawer>
   </div>
 </template>
 
-<script>
-import { ref } from "vue";
-
-export default {
-  setup() {
-    return {
-      slide: ref(1),
-      images: [
-        {
-          name: 1,
-          photo: "https://cdn.quasar.dev/img/mountains.jpg",
-        },
-        {
-          name: 2,
-          photo: "https://cdn.quasar.dev/img/parallax1.jpg",
-        },
-        {
-          name: 3,
-          photo: "https://cdn.quasar.dev/img/parallax2.jpg",
-        },
-        {
-          name: 4,
-          photo: "https://cdn.quasar.dev/img/quasar.jpg",
-        },
-      ],
-    };
-  },
-};
+<script setup>
+import DemoDrawer from "src/components/DemoDrawer.vue";
+import { ref, computed, watch, watchEffect, onMounted } from "vue";
+const todoId = ref(1);
+const openDrawer = ref(false);
+const input = ref(null);
+const data = ref(null);
+watchEffect(async () => {
+  const response = await fetch(
+    `https://jsonplaceholder.typicode.com/todos/${todoId.value}`
+  );
+  data.value = await response.json();
+});
+onMounted(() => {
+  input.value.focus();
+});
 </script>
+<style>
+input {
+  border: 1px solid;
+}
+</style>
